@@ -13,22 +13,32 @@ class UserModel extends Model
     // 准許進事件的key(跟資料庫欄位無關)
     protected $allowedFields = ['email', 'password'];
 
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
     protected $validationRules = [
-        'email' => 'required|valid_email|is_unique[mng_users.email]',
+        'email' => 'required|valid_email|is_unique[users.email]',
         'password' => 'required|min_length[8]',
         'pass_confirm' => 'required_with[password]|matches[password]'
     ];
 
     protected $validationMessages = [
         'email' => [
-            'is_unique' => 'Email不能重複哦'
+          'is_unique' => 'Email不能重複哦',
+          'valid_email' => 'Email不合法',
+          'required' => 'Email不能為空'
+        ],
+        'password' => [
+          'required' => '密碼不能為空',
+          'min_length' => '密碼長度不足8'
+        ],
+        'pass_confirm' => [
+          'required_with' => '重複密碼不能為空',
+          'matches' => '重複密碼錯誤'
         ]
-    ];
+      ];
     protected $skipValidation = false;
 
     protected function hashPassword(array $data)

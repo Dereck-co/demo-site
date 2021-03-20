@@ -16,7 +16,7 @@
             </div>
           </div>
         </li>
-        <li style="background-image: url(img/slider_2.jpg)" class="overlay">
+        <li style="background-image: url(/img/slider_2.jpg)" class="overlay">
           <div class="container">
             <div class="row">
               <div class="col-md-8 col-md-offset-2">
@@ -28,7 +28,7 @@
           </div>
           
         </li>
-        <li style="background-image: url(img/slider_3.jpg)" class="overlay">
+        <li style="background-image: url(/img/slider_3.jpg)" class="overlay">
           <div class="container">
             <div class="row">
               <div class="col-md-8 col-md-offset-2">
