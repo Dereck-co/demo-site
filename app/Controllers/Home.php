@@ -73,12 +73,12 @@ class Home extends BaseController
     {
       //存取網頁請求值POST
       $method = $this->request->getMethod();
+      
+      //檢查網頁方法是否為POST
+      if($method != 'post') die('bad reqiest');
 
       //檢查是否為AJAX資訊
       if(!$this->request->isAJAX()) die('bad request AJAX');
-
-      //檢查網頁方法是否為POST
-      if($method != 'post') die('bad reqiest');
 
       $postData = $this->request->getJSON();
 

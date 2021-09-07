@@ -28,4 +28,10 @@ class test extends Controller
         $entiUse->doLogin();
         print_r($entiUse);
     }
+    public function savefile()
+    {
+       $q = $this->request->getPost();
+       var_dump($q);
+       return view('test/savefile');
+    }
 }
