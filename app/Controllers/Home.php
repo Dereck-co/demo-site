@@ -18,6 +18,14 @@ class Home extends BaseController
       return view('pages/about');
     }
 
+    public function auth1(){
+      return view('authors/yang');
+	  }
+
+	  public function auth2(){
+      return view('authors/dereck');
+	  }
+
     public function portfolio()
     {
       return view('pages/portfolio');
