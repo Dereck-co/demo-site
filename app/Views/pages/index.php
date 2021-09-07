@@ -63,23 +63,16 @@
               </div>
             </div>
           </div>
-        <?php if(!$isLogin1): ?>
-            <div class="col-md-4 probootstrap-animate" data-animate-effect="fadeIn">
-              <div class="service hover_service text-center">
-                <div class="icon"><i class="icon-presentation"></i></div>
-                <div class="text">
-                  <h3>Business</h3>
-                  <p>This is a commodity platform being tested and our first construction</p>
-                </div>
+
+          <div class="col-md-4 probootstrap-animate" data-animate-effect="fadeIn">
+            <div class="service hover_service text-center">
+              <div class="icon"><i class="icon-presentation"></i></div>
+              <div class="text">
+                <h3>Business</h3>
+                <p>This is a commodity platform being tested and our first construction</p>
               </div>
             </div>
-        <?php else: ?>
-          <div  id = "shopin" class="col-md-4 probootstrap-animate" data-animate-effect="fadeIn">
-          <a  href="/shop">
-              <img id="imts" onmouseover="imgac()" onmouseout="imgac1()" style="width: 330px;height:291px;border-radius: 15px;" src="/img/opshop.jpg" alt="shop crash">
-          </a>
           </div>
-        <?php endif ?>
 
         <div class="col-md-4 probootstrap-animate" data-animate-effect="fadeIn">
           <div class="service hover_service text-center">
