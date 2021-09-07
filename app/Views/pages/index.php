@@ -54,7 +54,7 @@
             <div class="service hover_service text-center">
             <div>
               <a  href="home/auth1">
-              <img id="author1" class="auryang" src="/img/aur_yang.jpg" alt="img crash">
+              <img id="author1" class="auryang" src="/img/yang.jpg" alt="img crash">
               </a>
             </div>
               <div class="text">
