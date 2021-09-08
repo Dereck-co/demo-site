@@ -6,6 +6,17 @@
 
 <?php $this->section('content'); ?>
 
+<?php 
+  $user = new \App\Entities\User();
+  $isLogin = $user->isLogin();
+
+  if($isLogin){//如果登入
+    $currentUser = ($isLogin) ? $user->getCurrentUser() : null; //抓實體session
+    $partOfEmail = preg_replace('/(.+)@.+/', '$1' ,$currentUser->email); //取@前的字串
+    
+  }
+?>
+
     <section class="flexslider">
       <ul class="slides">
         
@@ -29,14 +40,14 @@
         <div class="row">
           <div class="col-md-5 probootstrap-animate" data-animate-effect="fadeIn">
             <h2>Drop us a line</h2>
-            <form action="#" method="post" class="probootstrap-form">
+            <form id="contactForm" method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="name">Full Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="username">
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email" value="<?=$currentUser->email ?>">
               </div>
               <div class="form-group">
                 <label for="subject">Subject</label>
@@ -70,5 +81,44 @@
         </div>
       </div>
     </section>
+
+    <script>
+        // loginForm.addEventListener('submit', function(event) {
+        //     console.log('on submit!!');
+
+        //     event.preventDefault();
+        // });
+
+
+
+        contactForm.onsubmit = function(event) {
+
+            let form = event.target;
+            let formData = new FormData(form);
+            let postData = Object.fromEntries(formData);
+            console.log('form', form);
+            console.log('postData', postData);
+
+            fetch('/home/toContact', {
+                body: JSON.stringify(postData),
+                cache: 'no-cache',
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json ',
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+            }).then(response => response.json()).then(doResultContant);
+            event.preventDefault();
+        }
+        function doResultContant(res) {
+            console.log('doResult:', res);
+            if(res.result){
+              location.reload();
+            }else{
+              let msg = Object.values(res.errMsg).join('\n');
+              alert(msg);
+            }
+        }
+    </script>
 
 <?php $this->endSection(); ?>

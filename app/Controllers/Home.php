@@ -77,6 +77,37 @@ class Home extends BaseController
       return $this->response->setJSON($result);
     }
 
+    public function toContact()
+    {
+      //初始化登入資訊值
+
+      $result = [
+        'result' => false,
+        'errMsg' => '',
+      ];
+
+      //存取網頁請求值POST
+      $method = $this->request->getMethod();
+
+      //檢查是否為AJAX資訊
+      if(!$this->request->isAJAX()) die('bad request AJAX');
+
+      //檢查網頁方法是否為POST
+      if($method != 'post') die('bad request');
+
+      $postData = $this->request->getJSON();
+      $user = new \App\Entities\User();
+
+      if($user->isLogin()){
+        $doRegist = $user->doContant((array)$postData);
+        return $this->response->setJSON($doRegist);
+      }else{
+        $result['errMsg'] = '請先登入';
+        return $this->response->setJSON($result);
+      }
+      
+    }
+
     public function toRegister()
     {
       //存取網頁請求值POST

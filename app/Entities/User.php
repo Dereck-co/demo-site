@@ -12,7 +12,11 @@ class User extends Entity
         'password_hash' => null,
         'created_at' => null,
         'updated_at' => null,
-        'deleted_at' => null
+        'deleted_at' => null,
+        //contant
+        'username' => null,
+        'subject' => null,
+        'message' => null,
     ];
     
     // 會依 "set + 屬性名稱" 的方式自動套用的邏輯
@@ -94,4 +98,27 @@ class User extends Entity
         }
             return $result;
     }
+
+    public function doContant($contant)
+    {
+         //初始化狀態
+         $result = [
+            'result' => false,
+            'errMsg' => null
+        ];
+        //將資料填入實體
+        $this->fill($contant);
+
+        $contModel = model('App\Models\ContModel');
+
+        //將留言資料填入資料庫時如果失敗就回傳errMsg，成功就將result回傳true
+        if($contModel->save($contant) === false){
+            $result['errMsg'] = $contModel->errors();
+        }else{
+            $result['result'] = true;
+        }
+        
+        return $result;
+    }
+
 }
