@@ -114,6 +114,7 @@
             console.log('doResult:', res);
             if(res.result){
               location.reload();
+              alert("我們已收到您的留言"));
             }else{
               let msg = Object.values(res.errMsg).join('\n');
               alert(msg);
