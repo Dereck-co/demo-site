@@ -26,72 +26,63 @@
 
     <section class="probootstrap-section proboostrap-clients probootstrap-bg-white probootstrap-zindex-above-showcase">
       <div class="container">
-
-        <div class="row mb50">
-          <div class="col-md-4"><h1 class="mt0">This Is A Nice Title For Your Project</h1></div>
-          <div class="col-md-7 col-md-push-1">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum est incidunt dolorem earum doloremque quasi mollitia magnam debitis eos eligendi ratione a illo ipsam aspernatur quas odio dicta! Neque ullam reiciendis numquam architecto eius reprehenderit aperiam dicta voluptates laborum a fugit sit non omnis perferendis magni suscipit dolorum cumque obcaecati autem. Explicabo odit veritatis quae porro praesentium veniam delectus itaque expedita cumque minus necessitatibus quia assumenda illum! Vitae doloribus nemo esse alias autem debitis facilis quae pariatur voluptatum eaque perspiciatis animi accusantium cupiditate at molestias optio assumenda hic fuga. Consequatur vero cupiditate ea dolorum sit cum odio ipsam aliquam sed!</p>
-            <p>Explicabo odit veritatis quae porro praesentium veniam delectus itaque expedita cumque minus necessitatibus quia assumenda illum! Vitae doloribus nemo esse alias autem debitis facilis quae pariatur voluptatum eaque perspiciatis animi accusantium cupiditate at molestias optio assumenda hic fuga. Consequatur vero cupiditate ea dolorum sit cum odio ipsam aliquam sed!</p>
-          </div>
-        </div>
-        <!-- END row -->
-        <div class="row">
-          <div class="col-md-12">
-            <p><img src="/img/slider_1.jpg" class="img-responsive" alt="Free Bootstrap Template by uicookies.com"></p>
-          </div>
-        </div>
+        <h1>36H 天氣預報</h1>
+        <table id="dt" class="display compact hover" border="1">
+            <thead>
+                <tr>
+                    <th>編號</th>
+                    <th>地區</th>
+                    <th>早上</th>
+                    <th>中午</th>
+                    <th>晚上</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
       </div>
     </section>
 
 <?php echo $this->include('component/testimonial'); ?>
-
-    <section class="probootstrap-section probootstrap-bg-white ">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 text-center section-heading">
-            <h2>More Project</h2>
-          </div>
-        </div>
-      </div>
-      <div class="owl-carousel owl-work">
-        <div class="item">
-          <a href="portfolio-single.html">
-            <img src="/img/work_1.jpg" alt="Free Bootstrap Template by uicookies.com">
-          </a>
-        </div>
-        <div class="item">
-          <a href="portfolio-single.html">
-            <img src="/img/work_2.jpg" alt="Free Bootstrap Template by uicookies.com">
-          </a>
-        </div>
-        <div class="item">
-          <a href="portfolio-single.html">
-            <img src="/img/work_3.jpg" alt="Free Bootstrap Template by uicookies.com">
-          </a>
-        </div>
-        <div class="item">
-          <a href="portfolio-single.html">
-            <img src="/img/work_4.jpg" alt="Free Bootstrap Template by uicookies.com">
-          </a>
-        </div>  
-        <div class="item">
-          <a href="portfolio-single.html">
-            <img src="/img/work_5.jpg" alt="Free Bootstrap Template by uicookies.com">
-          </a>
-        </div>
-        <div class="item">
-          <a href="portfolio-single.html">
-            <img src="/img/work_6.jpg" alt="Free Bootstrap Template by uicookies.com">
-          </a>
-        </div>
-        <div class="item">
-          <a href="portfolio-single.html">
-            <img src="/img/work_7.jpg" alt="Free Bootstrap Template by uicookies.com">
-          </a>
-        </div>
-      </div>
-    </section>      
-    
 <?php echo $this->include('component/contactus'); ?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script>
+  var data;
+
+  $.getJSON('https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-397EE7AF-08D4-494B-B69B-D284C518384B&limit=10')
+    .done(function(re){
+      console.log("getJSON:",re);
+      data = re;
+      // data = re.cwbopendata.dataset.location;
+      for (let i = 0; i < data["records"]["location"].length; i++) {
+      row = data["records"]["location"][i];
+      print += `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${row.locationName}</td>
+      <td>${row.weatherElement[0].time[0].parameter.parameterName} | 溫度 ${row.weatherElement[2].time[0].parameter.parameterName} ~ ${row.weatherElement[4].time[0].parameter.parameterName} ℃</td>
+      <td>${row.weatherElement[0].time[1].parameter.parameterName} | 溫度 ${row.weatherElement[2].time[1].parameter.parameterName} ~ ${row.weatherElement[4].time[1].parameter.parameterName} ℃</td>
+      <td>${row.weatherElement[0].time[2].parameter.parameterName} | 溫度 ${row.weatherElement[2].time[2].parameter.parameterName} ~ ${row.weatherElement[4].time[2].parameter.parameterName} ℃</td>
+    </tr>
+    `;
+    console.log(row.weatherElement);
+    }
+    $('tbody').html(print);
+    })
+    .fail(function(w){
+      alert("faill openapi,"+w)
+    });
+    $('#dt').DataTable({
+      "searching": false,
+      "sPaginationType": "numbers", 
+      "info": false,
+      "ordering": false, 
+      "dom": '<"top">rt<"bottom"><"clear">',
+
+    }); 
+</script>
 
 <?php $this->endSection(); ?>

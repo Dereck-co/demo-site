@@ -53,20 +53,18 @@
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate" data-animate-effect="fadeIn">
             <h2>Get in touch</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
+            <p>If there has any question, please contact me right away. Thanks.</p>
             
-            <h4>USA</h4>
+            <h4>KUAN_TE</h4>
             <ul class="probootstrap-contact-info">
-              <li><i class="icon-pin"></i> <span>198 West 21th Street, Suite 721 New York NY 10016</span></li>
-              <li><i class="icon-email"></i><span>info@domain.com</span></li>
-              <li><i class="icon-phone"></i><span>+123 456 7890</span></li>
+              <li><i class="icon-email"></i><span>a0920210341@gmail.com</span></li>
+              <li><i class="icon-phone"></i><span>0920210341</span></li>
             </ul>
             
-            <h4>Europe</h4>
+            <h4>ZIYANG XU</h4>
             <ul class="probootstrap-contact-info">
-              <li><i class="icon-pin"></i> <span>198 West 21th Street, Suite 721 New York NY 10016</span></li>
-              <li><i class="icon-email"></i><span>info@domain.com</span></li>
-              <li><i class="icon-phone"></i><span>+123 456 7890</span></li>
+              <li><i class="icon-email"></i><span>d1064241037@gm.lhu.edu.tw</span></li>
+              <li><i class="icon-phone"></i><span>0920662385</span></li>
             </ul>
           </div>
         </div>
