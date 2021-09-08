@@ -111,18 +111,18 @@ class User extends Entity
 
         $contModel = model('App\Models\ContModel');
 
-        $email = \Config\Services::email();
-		$email->setFrom('a0920210341@gmail.com', 'Service');
-		$email->setTo($contant['email']);
-		$email->setSubject('回饋通知');
-        $email->setMessage('我們已收到您的留言');
-        $email->send();
 
         //將留言資料填入資料庫時如果失敗就回傳errMsg，成功就將result回傳true
         if($contModel->save($contant) === false){
             $result['errMsg'] = $contModel->errors();
         }else{
             $result['result'] = true;
+            $email = \Config\Services::email();
+            $email->setFrom('a0920210341@gmail.com', 'Service');
+            $email->setTo($contant['email']);
+            $email->setSubject('回饋通知');
+            $email->setMessage('我們已收到您的留言');
+            $email->send();
         }
         
         return $result;
