@@ -43,7 +43,7 @@
             <form id="contactForm" method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="name">Full Name</label>
-                <input type="text" class="form-control" id="name" name="username" value="<?=$partOfEmail?>">
+                <input type="text" class="form-control" id="name" name="username">
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
